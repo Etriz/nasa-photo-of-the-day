@@ -95,6 +95,7 @@ header p {
 @media screen and (max-width: 500px) {
   .lgImg img {
     width: 100vmin;
+    height: auto;
   }
 }
 .pagination {
