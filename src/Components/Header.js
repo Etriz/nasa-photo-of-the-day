@@ -9,8 +9,9 @@ export default function Header(props) {
     return today.toDateString();
   };
   return (
-    <nav>
-      <h1>Photo of the Day from {photoDate()}</h1>
-    </nav>
+    <header>
+      <h1>NASA's Daily Photo</h1>
+      <p>{photoDate()}</p>
+    </header>
   );
 }
