@@ -29,7 +29,7 @@ export default function Header(props) {
         calendarType="US"
         maxDate={new Date()}
         value={new Date(props.date)}
-        onChange={(date) => props.setDate(new Date(date))} // exports date in DateString() format? maybe?
+        onChange={(date) => props.changeDate(new Date(date))} // exports date in DateString() format? maybe?
       />
     </HeaderArea>
   );

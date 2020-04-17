@@ -19,7 +19,7 @@ const DailyImg = styled.div`
   padding: 1rem;
 `;
 
-export default function Info(props) {
+export default function Image(props) {
   const [isLarge, setIsLarge] = useState(false);
   const resizeImage = () => {
     if (isLarge === false) {
