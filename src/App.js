@@ -31,10 +31,13 @@ function App() {
         `https://api.nasa.gov/planetary/apod?api_key=bz4FmhGJfLgGHH87N2KzC1axPwRbe6Ih7xVdz3ev&date=${apiDate}`
       )
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         setData(res.data);
       })
-      .catch((err) => console.error("Axios Error!", err));
+      .catch((err) => {
+        console.error("Axios Error!", err);
+        setData(err);
+      });
   }, [apiDate]);
 
   const changeDate = (date) => {
