@@ -51,9 +51,10 @@ export default function Image(props) {
               <img src={props.data.url} alt="daily img" className="" />
             </div>
             <div className="pagination">
-              <Button>Previous</Button>
+              <Button onClick={() => props.previousDate()}>Previous</Button>
               <p>Click image to enlarge</p>
-              <Button>Next</Button>
+              <Button onClick={() => props.nextDate()}>Next</Button>
+              {/* will fail if try to go forward past current day*/}
             </div>
           </>
         ) : (

@@ -31,7 +31,7 @@ function App() {
         `https://api.nasa.gov/planetary/apod?api_key=bz4FmhGJfLgGHH87N2KzC1axPwRbe6Ih7xVdz3ev&date=${apiDate}`
       )
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setData(res.data);
       })
       .catch((err) => {
@@ -43,10 +43,20 @@ function App() {
   const changeDate = (date) => {
     setDate(date);
   };
+  const previousDate = () => {
+    const foo = date.getDate() - 1;
+    const previous = new Date(date.setDate(foo));
+    setDate(previous);
+  };
+  const nextDate = () => {
+    const foo = date.getDate() + 1;
+    const next = new Date(date.setDate(foo));
+    setDate(next);
+  };
   return (
     <div className="App">
       <Header data={data} date={date} changeDate={changeDate} apiDate={apiDate} />
-      <Image data={data} />
+      <Image data={data} date={date} previousDate={previousDate} nextDate={nextDate} />
     </div>
   );
 }

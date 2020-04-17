@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import Calendar from "react-date-picker";
 // import "react-calendar/dist/Calendar.css";
@@ -9,14 +9,15 @@ const HeaderArea = styled.header`
   font-size: calc(10px + 2vmin);
   color: white;
   background: #282c34;
+  background: linear-gradient(0deg, rgba(40, 44, 52, 1) 75%, rgba(97, 218, 251, 0.5) 100%);
   border-bottom: 1px solid #61dafb;
   width: 100%;
 `;
 
 export default function Header(props) {
-  useEffect(() => {
-    console.log(props.date, props.apiDate);
-  });
+  // useEffect(() => {
+  //   console.log(props.date, props.apiDate);
+  // });
   return (
     <HeaderArea>
       <h1>NASA's Daily Photo</h1>
