@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Calendar from "react-date-picker";
 // import "react-calendar/dist/Calendar.css";
 
 const HeaderArea = styled.header`
   padding: 0.5rem;
+  padding-bottom: 1rem;
   font-size: calc(10px + 2vmin);
   color: white;
   background: #282c34;
@@ -13,18 +14,13 @@ const HeaderArea = styled.header`
 `;
 
 export default function Header(props) {
-  // const dateConversion = () => {
-  //   const str = props.data.date;
-  //   const dateStr = str.split("-");
-  //   const [year, month, day] = dateStr;
-  //   let today = new Date(year, month - 1, day);
-  //   return today.toDateString();
-  // };
+  useEffect(() => {
+    console.log(props.date, props.apiDate);
+  });
   return (
     <HeaderArea>
       <h1>NASA's Daily Photo</h1>
-      <p>{props.date.toDateString()}</p>
-      <p>{console.log(props.date)}</p>
+      {/* <p>{props.date.toDateString()}</p> */}
       <Calendar
         calendarType="US"
         maxDate={new Date()}

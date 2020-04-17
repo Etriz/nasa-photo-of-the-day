@@ -3,40 +3,47 @@ import axios from "axios";
 import Header from "./Components/Header";
 import Image from "./Components/Image";
 import "./App.css";
-import TEST from "./TEST-DATA.json";
+// import TEST from "./TEST-DATA.json";
 
 function App() {
-  const [test] = useState(TEST);
+  // const [test] = useState(TEST);
   const [date, setDate] = useState(new Date());
+
+  const changeApiDate = (someDate) => {
+    let todayDate = new Date(someDate);
+    let month = (todayDate.getMonth() + 1).toString().padStart(2, "0");
+    let day = todayDate.getDate();
+    let year = todayDate.getFullYear();
+    return `${year}-${month}-${day}`; //sets date state in format yyyy-mm-dd as needed by API
+  };
+
+  const [apiDate, setApiDate] = useState(changeApiDate(Date.now()));
+
   useEffect(() => {
-    defaultTodayDate();
+    setApiDate(changeApiDate(date));
   }, [date]);
-  const [apiDate, setApiDate] = useState("2020-04-08");
+
+  const [data, setData] = useState({});
+
   useEffect(() => {
     axios
-      .get(`https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date=${apiDate}`)
+      .get(
+        `https://api.nasa.gov/planetary/apod?api_key=bz4FmhGJfLgGHH87N2KzC1axPwRbe6Ih7xVdz3ev&date=${apiDate}`
+      )
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setData(res.data);
       })
       .catch((err) => console.error("Axios Error!", err));
   }, [apiDate]);
-  const [data, setData] = useState({});
 
-  const defaultTodayDate = () => {
-    let todayDate = date;
-    let month = (todayDate.getMonth() + 1).toString().padStart(2, "0");
-    let day = todayDate.getDate();
-    let year = todayDate.getFullYear();
-    setApiDate(`${year}-${month}-${day}`); //sets date state in format yyyy-mm-dd as needed by API
-  };
   const changeDate = (date) => {
     setDate(date);
   };
   return (
     <div className="App">
-      <Header data={data} date={date} changeDate={changeDate} />
-      <Image data={data} date={date} />
+      <Header data={data} date={date} changeDate={changeDate} apiDate={apiDate} />
+      <Image data={data} />
     </div>
   );
 }

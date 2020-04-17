@@ -32,19 +32,21 @@ export default function Image(props) {
     <DailyImg className="dailyimg">
       <h2>{props.data.title}</h2>
       {!isLarge ? (
-        <div className="smImg" onClick={() => resizeImage()}>
-          <img src={props.data.url} alt="daily img" className="" />
-        </div>
+        <>
+          <div className="smImg" onClick={() => resizeImage()}>
+            <img src={props.data.url} alt="daily img" className="" />
+          </div>
+          <div className="pagination">
+            <Button>Previous</Button>
+            <p>Click image to enlarge</p>
+            <Button>Next</Button>
+          </div>
+        </>
       ) : (
         <div className="lgImg" onClick={() => resizeImage()}>
           <img src={props.data.hdurl} alt="daily img large" className="" />
         </div>
       )}
-      <div className="pagination">
-        <Button>Previous</Button>
-        <p>Click image to enlarge</p>
-        <Button>Next</Button>
-      </div>
     </DailyImg>
   );
 }
