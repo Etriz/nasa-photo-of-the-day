@@ -1,4 +1,23 @@
 import React, { useState } from "react";
+import styled from "styled-components";
+
+const Button = styled.button`
+  outline: none;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0rem 1rem;
+  background: #61dafb;
+  cursor: pointer;
+  border: 1px solid #61dafb;
+  &:hover {
+    border: 1px solid #61dafb;
+    background: white;
+  }
+`;
+const DailyImg = styled.div`
+  color: lightgray;
+  padding: 1rem;
+`;
 
 export default function Info(props) {
   const [isLarge, setIsLarge] = useState(false);
@@ -10,7 +29,7 @@ export default function Info(props) {
     }
   };
   return (
-    <div className="dailyimg">
+    <DailyImg className="dailyimg">
       <h2>{props.data.title}</h2>
       {!isLarge ? (
         <div className="smImg" onClick={() => resizeImage()}>
@@ -22,10 +41,10 @@ export default function Info(props) {
         </div>
       )}
       <div className="pagination">
-        <button className="btn">Previous</button>
+        <Button>Previous</Button>
         <p>Click image to enlarge</p>
-        <button className="btn">Next</button>
+        <Button>Next</Button>
       </div>
-    </div>
+    </DailyImg>
   );
 }
