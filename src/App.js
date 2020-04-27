@@ -7,7 +7,7 @@ import "./App.css";
 
 function App() {
   // const [test] = useState(TEST);
-  const [date, setDate] = useState(new Date());
+  const [dateState, setDateState] = useState(new Date());
 
   const changeApiDate = (someDate) => {
     let todayDate = new Date(someDate);
@@ -20,8 +20,8 @@ function App() {
   const [apiDate, setApiDate] = useState(changeApiDate(Date.now()));
 
   useEffect(() => {
-    setApiDate(changeApiDate(date));
-  }, [date]);
+    setApiDate(changeApiDate(dateState));
+  }, [dateState]);
 
   const [data, setData] = useState({});
 
@@ -41,22 +41,33 @@ function App() {
   }, [apiDate]);
 
   const changeDate = (date) => {
-    setDate(date);
+    setDateState(date);
   };
   const previousDate = () => {
-    const foo = date.getDate() - 1;
-    const previous = new Date(date.setDate(foo));
-    setDate(previous);
+    const foo = dateState.getDate() - 1;
+    const previous = new Date(dateState.setDate(foo));
+    const today = new Date(Date.now());
+    if (previous >= Date.now()) {
+      changeDate(today);
+    } else {
+      changeDate(previous);
+      // console.log(dateState);
+    }
   };
   const nextDate = () => {
-    const foo = date.getDate() + 1;
-    const next = new Date(date.setDate(foo));
-    setDate(next);
+    const foo = dateState.getDate() + 1;
+    const next = new Date(dateState.setDate(foo));
+    if (next <= Date.now()) {
+      changeDate(next);
+    } else {
+      setData({ title: "Unable to show the future!", url: " ", hdurl: " " });
+      // console.log(dateState);
+    }
   };
   return (
     <div className="App">
-      <Header data={data} date={date} changeDate={changeDate} apiDate={apiDate} />
-      <Image data={data} date={date} previousDate={previousDate} nextDate={nextDate} />
+      <Header data={data} date={dateState} changeDate={changeDate} apiDate={apiDate} />
+      <Image data={data} date={dateState} previousDate={previousDate} nextDate={nextDate} />
     </div>
   );
 }

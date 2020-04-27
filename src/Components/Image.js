@@ -28,8 +28,6 @@ export default function Image(props) {
       setIsLarge(false);
     }
   };
-  const TODAY_DATE = new Date(Date.now());
-  const TODAY_DATE_NUMBER = TODAY_DATE.getDate();
 
   if (props.data === "Error")
     return (
@@ -51,16 +49,36 @@ export default function Image(props) {
         {!isLarge ? (
           <>
             <div className="smImg" onClick={() => resizeImage()}>
-              <img src={props.data.url} alt="daily img" className="" />
+              {props.data.media_type === "image" ? (
+                <img src={props.data.url} alt="daily img" className="" />
+              ) : (
+                <div
+                  className="video"
+                  style={{
+                    position: "relative",
+                    paddingBottom: "56.25%" /* 16:9 */,
+                    paddingTop: 25,
+                    height: 0,
+                  }}>
+                  <iframe
+                    title={props.data.title}
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      width: "100%",
+                      height: "100%",
+                    }}
+                    src={props.data.url}
+                    frameBorder="0"
+                  />
+                </div>
+              )}
             </div>
             <div className="pagination">
               <Button onClick={props.previousDate}>Previous</Button>
               <p>Click image to enlarge</p>
-              {props.date.getDate() !== TODAY_DATE_NUMBER ? (
-                <Button onClick={props.nextDate}>Next</Button>
-              ) : (
-                <></>
-              )}
+              <Button onClick={props.nextDate}>Next</Button>
             </div>
           </>
         ) : (
