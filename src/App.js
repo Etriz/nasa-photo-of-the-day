@@ -36,7 +36,7 @@ function App() {
       })
       .catch((err) => {
         console.error("Axios Error!", err);
-        setData(err);
+        setData("Error");
       });
   }, [apiDate]);
 

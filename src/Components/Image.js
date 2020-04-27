@@ -28,19 +28,22 @@ export default function Image(props) {
       setIsLarge(false);
     }
   };
+  const TODAY_DATE = new Date(Date.now());
+  const TODAY_DATE_NUMBER = TODAY_DATE.getDate();
 
-  if (!props.data.url)
+  if (props.data === "Error")
+    return (
+      <DailyImg>
+        <h2>Server Error</h2>
+        <p>Please Try Again Later</p>
+      </DailyImg>
+    );
+  else if (!props.data.url)
     return (
       <DailyImg>
         <h2>Loading...</h2>
       </DailyImg>
     );
-  // else if (props.data)
-  //   return (
-  //     <DailyImg>
-  //       <h2>Server Error</h2>
-  //     </DailyImg>
-  //   );
   else
     return (
       <DailyImg className="dailyimg">
@@ -51,15 +54,18 @@ export default function Image(props) {
               <img src={props.data.url} alt="daily img" className="" />
             </div>
             <div className="pagination">
-              <Button onClick={() => props.previousDate()}>Previous</Button>
+              <Button onClick={props.previousDate}>Previous</Button>
               <p>Click image to enlarge</p>
-              <Button onClick={() => props.nextDate()}>Next</Button>
-              {/* will fail if try to go forward past current day*/}
+              {props.date.getDate() !== TODAY_DATE_NUMBER ? (
+                <Button onClick={props.nextDate}>Next</Button>
+              ) : (
+                <></>
+              )}
             </div>
           </>
         ) : (
           <div className="lgImg" onClick={() => resizeImage()}>
-            <img src={props.data.hdurl} alt="daily img large" className="" />{" "}
+            <img src={props.data.hdurl} alt="daily img large" className="" />
           </div>
         )}
       </DailyImg>
